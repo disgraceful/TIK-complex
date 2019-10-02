@@ -1,26 +1,25 @@
-import Code from "../Code"
-export const grey = new Code("grey");
-grey.code = value => {
-    let v = value;
-    v.split("");
-    let coded = v.map(e => {
-        if (v.indexOf(e) >= v.legnth - 1) {
-            return e
-        } else {
-            return e ^ v[v.indexOf(e) + 1];
+/* eslint-disable */
+export const greyCodeLogic = {
+    methods: {
+        code(message) {
+            if (!/^[01]+$/.test(message)) {
+                console.error('non-binary');
+            }
+
+            let split = message.split("").reverse();
+            let coded = split.map((e, index) => {
+                if (index + 1 >= split.length) return e;
+                else return e ^ split[index + 1];
+
+
+            })
+            console.log("anwer", coded.reverse().join(""));
+
+        },
+        decode(message) {
+
         }
-    });
-    return coded.reverse().join("");
+    }
 }
 
-grey.decode = value => {
-    let v = value;
-    let decoded = v.map(e => {
-        if (v.indexOf(e) >= v.legnth - 1) {
-            return e
-        } else {
-          //????
-        }
-    })
-    return decoded;
-}
+

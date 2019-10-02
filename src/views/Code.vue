@@ -4,6 +4,9 @@
 
     <v-container>
       <v-row>
+        <router-link to="/" tag="v-btn">
+          <v-btn>Go Back To Codes</v-btn>
+        </router-link>
         <v-btn @click="setActiveComponent('Theory')">Theory</v-btn>
         <v-btn @click="setActiveComponent('Test')">Test</v-btn>
         <v-btn @click="setActiveComponent('Code')">Practice Code</v-btn>
@@ -20,7 +23,7 @@ export default {
     return {
       codeName: this.$route.params.name,
       componentName: null,
-      activeComponent: ()=> import(`../components/codes/${this.componentName}`)
+      activeComponent: () => import(`../components/codes/${this.componentName}`)
     };
   },
   computed: {
@@ -35,7 +38,7 @@ export default {
     }
   },
   beforeMount() {
-    this.componentName = `${this.codeName}Theory`;    
+    this.componentName = `${this.codeName}Test`;
   },
   mounted() {
     this.loader()

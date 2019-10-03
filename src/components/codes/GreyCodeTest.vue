@@ -1,13 +1,7 @@
 <template>
   <v-card>
     <v-card-title>Code Test</v-card-title>
-    <v-card-text>Code the message {{msg}}</v-card-text>
-    <v-card-actions>
-      <v-col>
-        <v-text-field filled height="15px" dense v-model="model"></v-text-field>
-        <v-btn :disabled="btnValid" @click="check()">Submit</v-btn>
-      </v-col>
-    </v-card-actions>
+
   </v-card>
 </template>
 
@@ -17,23 +11,9 @@ export default {
   data() {
     return {
       name: "GreyCodeTest",
-      msg: 111001101,
-      model: ""
+ 
     };
   },
-  computed: {
-    btnValid() {
-      return this.model === undefined || this.model === "";
-    }
-  },
-  mixins: [greyCodeLogic],
-  methods: {
-    check() {
-      if (!this.btnValid) {
-        this.code(this.model.trim());
-      }
-    }
-  },
-  mounted() {}
+ 
 };
 </script>

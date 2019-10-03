@@ -10,7 +10,7 @@
         <v-btn @click="setActiveComponent('Theory')">Theory</v-btn>
         <v-btn @click="setActiveComponent('Test')">Test</v-btn>
         <v-btn @click="setActiveComponent('Code')">Practice Code</v-btn>
-        <v-btn @click="setActiveComponent('PracticeDecode')">Practice Decode</v-btn>
+        <v-btn @click="setActiveComponent('Decode')">Practice Decode</v-btn>
       </v-row>
     </v-container>
     <component :is="activeComponent"></component>

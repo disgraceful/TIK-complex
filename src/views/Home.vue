@@ -47,7 +47,7 @@ export default {
         subcodes: [
           { name: "Grey Code", to: name.replace(/\s+/g, "") },
           { name: "Berger Code", to: name.replace(/\s+/g, "") },
-          { name: "Binary-decimal Code", to: name.replace(/\s+/g, "") }
+          { name: "Binary Decimal Code", to: name.replace(/\s+/g, "") }
         ]
       }
     ]

@@ -41,7 +41,18 @@ export default {
     codes: [
       { name: "Systematic codes", subcodes: [] },
       { name: "Cycle codes", subcodes: [] },
-      { name: "Nonbinary codes", subcodes: [] },
+      {
+        name: "Nonbinary codes",
+        subcodes: [
+          {
+            name: "Primal NonBinary Code",
+            to: name.replace(/\s+/g, "")
+          },
+          { name: "Q Check Code", to: name.replace(/\s+/g, "") },
+          { name: "Simple Repeat Code", to: name.replace(/\s+/g, "") },
+          { name: "Iterate Code", to: name.replace(/\s+/g, "") }
+        ]
+      },
       {
         name: "Other codes",
         subcodes: [

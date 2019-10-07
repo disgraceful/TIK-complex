@@ -8,9 +8,6 @@
           <v-text-field filled height="15px" dense v-model.trim="model"></v-text-field>
         </v-container>
 
-        <v-container fluid>
-          <v-text-field filled height="15px" dense v-model.trim="decimalcode"></v-text-field>
-        </v-container>
       </v-row>
       <v-container fluid>
         <v-btn :disabled="btnValid" @click="check()">Submit</v-btn>
@@ -20,7 +17,7 @@
 </template>
 
 <script>
-import { bdCodeLogic } from "../../codelogic/othercodes/bdcode";
+import { bergerCodeLogic } from "../../codelogic/othercodes/berger";
 export default {
   data() {
     return {
@@ -31,14 +28,14 @@ export default {
   },
   computed: {
     btnValid() {
-      return this.model === undefined || this.model === "" || this.decimalcode === undefined || this.decimalcode==="";
+      return this.model === undefined || this.model === "";
     }
   },
-  mixins: [bdCodeLogic],
+  mixins: [bergerCodeLogic],
   methods: {
     check() {
       if (!this.btnValid) {
-        this.decode(this.model.trim(), this.decimalcode.trim());
+        this.decode(this.model.trim());
       }
     }
   }

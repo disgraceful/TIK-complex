@@ -16,7 +16,7 @@
         </v-row>
         <v-row>
           <v-container fluid>
-            <v-text-field label="moe" filled height="15px" dense v-model.trim="alphabet"></v-text-field>
+            <v-text-field label="alphabet" filled height="15px" dense v-model.trim="alphabet"></v-text-field>
           </v-container>
         </v-row>
         <v-row>
@@ -38,11 +38,17 @@ export default {
   data() {
     return {
       name: "PrimalNonBinaryCodeCode",
-      q: "4",
-      n: "4",
-      alphabet: "abcd",
+      q: "3",
+      n: "3",
+      alphabet: "abc",
       type: "transposition",
-      types: ["certaincombination", "transposition"]
+      types: [
+        "limitedCombination",
+        "transposition",
+        "accomodation",
+        "allCombination",
+        "quality"
+      ]
     };
   },
   computed: {

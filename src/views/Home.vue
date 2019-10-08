@@ -13,7 +13,6 @@
                   tag="v-list-item-title"
                 >
                   <v-list-item-title v-text="subcode.name"></v-list-item-title>
-                  <div>{{routeParam(subcode.name)}}</div>
                 </router-link>
               </v-list-item-content>
             </v-list-item>

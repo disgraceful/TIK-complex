@@ -38,7 +38,7 @@ export default {
     }
   },
   beforeMount() {
-    this.componentName = `${this.codeName}Test`;
+    this.componentName = `${this.codeName}Code`;
   },
   mounted() {
     this.loader()

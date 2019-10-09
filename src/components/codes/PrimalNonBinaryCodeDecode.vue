@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { bergerCodeLogic } from "../../codelogic/othercodes/berger";
+import { bergerCodeLogic } from "../../codelogic/nonbinary/qcheckcode";
 export default {
   data() {
     return {

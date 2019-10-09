@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { primalNonBinary } from "../../codelogic/othercodes/primalnonbinary";
+import { primalNonBinary } from "../../codelogic/nonbinary/primalnonbinary";
 export default {
   data() {
     return {

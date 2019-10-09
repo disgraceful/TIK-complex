@@ -10,7 +10,7 @@
                 <router-link
                   v-if="subcode!==undefined || subcode!== null"
                   :to="`/code/${routeParam(subcode.name)}`"
-                  tag="v-list-item-title"
+                  tag="li"
                 >
                   <v-list-item-title v-text="subcode.name"></v-list-item-title>
                 </router-link>
@@ -21,9 +21,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
     <v-container fluid>
-      <router-link to="/info" tag="v-btn">
-        <v-btn>Done</v-btn>
-      </router-link>
+      <v-btn>Done</v-btn>
       <v-btn>Info</v-btn>
     </v-container>
   </v-card>
@@ -43,21 +41,18 @@ export default {
       {
         name: "Nonbinary codes",
         subcodes: [
-          {
-            name: "Primal NonBinary Code",
-            to: name.replace(/\s+/g, "")
-          },
-          { name: "Q Check Code", to: name.replace(/\s+/g, "") },
-          { name: "Simple Repeat Code", to: name.replace(/\s+/g, "") },
-          { name: "Iterate Code", to: name.replace(/\s+/g, "") }
+          { name: "Primal NonBinary Code" },
+          { name: "Q Check Code" },
+          { name: "Simple Repeat Code" },
+          { name: "Iterate Code" }
         ]
       },
       {
         name: "Other codes",
         subcodes: [
-          { name: "Grey Code", to: name.replace(/\s+/g, "") },
-          { name: "Berger Code", to: name.replace(/\s+/g, "") },
-          { name: "Binary Decimal Code", to: name.replace(/\s+/g, "") }
+          { name: "Grey Code" },
+          { name: "Berger Code" },
+          { name: "Binary Decimal Code" }
         ]
       }
     ]

@@ -4,16 +4,15 @@
 
     <v-container>
       <v-row>
-        <router-link to="/" tag="v-btn">
-          <v-btn>Go Back To Codes</v-btn>
-        </router-link>
-        <v-btn @click="setActiveComponent('Theory')">Theory</v-btn>
-        <v-btn @click="setActiveComponent('Test')">Test</v-btn>
-        <v-btn @click="setActiveComponent('Code')">Practice Code</v-btn>
-        <v-btn @click="setActiveComponent('Decode')">Practice Decode</v-btn>
+        <v-btn text @click="$router.push({path:'/'})">Back To Codes</v-btn>
+        <v-btn text @click="setActiveComponent('Theory')">Theory</v-btn>
+        <v-btn text @click="setActiveComponent('Test')">Test</v-btn>
+        <v-btn text @click="setActiveComponent('Practice')">Practice</v-btn>
       </v-row>
     </v-container>
-    <component :is="activeComponent"></component>
+    <keep-alive>
+      <component :is="activeComponent"></component>
+    </keep-alive>
   </v-card>
 </template>
 
@@ -38,7 +37,7 @@ export default {
     }
   },
   beforeMount() {
-    this.componentName = `${this.codeName}Code`;
+    this.componentName = `${this.codeName}Practice`;
   },
   mounted() {
     this.loader()

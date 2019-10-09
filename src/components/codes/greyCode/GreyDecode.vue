@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { greyCodeLogic } from "../../codelogic/othercodes/grey";
+//import { greyCodeLogic } from "../../codelogic/othercodes/grey";
 export default {
   data() {
     return {
@@ -26,7 +26,7 @@ export default {
       return this.model === undefined || this.model === "";
     }
   },
-  mixins: [greyCodeLogic],
+  //mixins: [greyCodeLogic],
   methods: {
     check() {
       if (!this.btnValid) {

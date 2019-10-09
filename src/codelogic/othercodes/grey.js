@@ -2,10 +2,6 @@
 export const greyCodeLogic = {
     methods: {
         code(message) {
-            if (this.checkBinary(message)) {
-                console.error('non-binary');
-            }
-
             let split = message.split("").reverse();
             let coded = split.map((e, index) => {
                 if (index + 1 >= split.length) return e;
@@ -17,9 +13,6 @@ export const greyCodeLogic = {
 
         },
         decode(message) {
-            if (this.checkBinary(message)) {
-                console.error('non-binary');
-            }
             let split = message.split("");
             let index = split.length - 1;
             let previous;
@@ -37,9 +30,6 @@ export const greyCodeLogic = {
             console.log("answer", answer);
             return answer;
         },
-        checkBinary(message) {
-            return !/^[01]+$/.test(message);
-        }
     }
 }
 

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { qCheckLogic } from "../../codelogic/othercodes/qcheckcode";
+import { qCheckLogic } from "../../codelogic/nonbinary/qcheckcode";
 export default {
   data() {
     return {

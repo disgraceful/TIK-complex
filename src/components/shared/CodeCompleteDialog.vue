@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="headline">{{dialogText}}</v-card-title>
+
     <div v-if="!correct">
       <v-card-text class="subtitle-1">Try again?</v-card-text>
       <v-card-actions>
@@ -8,6 +9,9 @@
         <v-btn color="green darken-1" text @click="endDialog(false)">No</v-btn>
       </v-card-actions>
     </div>
+    <v-card-actions v-else>
+      <v-btn color="green darken-1" text @click="endDialog(false,true)">Ok Cool</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -26,8 +30,9 @@ export default {
     }
   },
   methods: {
-    endDialog(resume) {
-      this.$emit("endDialog", resume);
+    endDialog(resume, completed) {
+      if (completed) this.$emit("completed");
+      else this.$emit("endDialog", resume);
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-card-title></v-card-title>
-    <v-card-text class="title">Code the message:</v-card-text>
+    <v-card-text class="title">Code the message (insert or generate):</v-card-text>
     <v-card-actions>
       <v-col>
         <v-col>
@@ -35,15 +35,20 @@
           <p>Enter coded message:</p>
           <v-text-field
             v-model.trim="answer"
-            :rules="[rules,rules.binary]"
+            :rules="[rules.required,rules.binary]"
             filled
             height="15px"
             dense
           ></v-text-field>
         </v-col>
+        <v-btn @click="fullReset()">Reset</v-btn>
         <v-btn :disabled="btnValid" @click="submit()">Submit</v-btn>
         <v-dialog v-model="dialog" max-width="330px" hide-overlay>
-          <code-dialog :correct="correct===answer" @endDialog="resetForm($event)"></code-dialog>
+          <code-dialog
+            :correct="correct===answer"
+            @endDialog="resetForm($event)"
+            @completed="resetForm('completed')"
+          ></code-dialog>
         </v-dialog>
       </v-col>
     </v-card-actions>
@@ -59,11 +64,13 @@ export default {
       model: "",
       answer: "",
       correct: "",
+      completed: 0,
       dialog: false,
       slider: {
         min: 3,
         max: 15,
-        value: 8
+        value: 8,
+        default: 8
       },
       rules: {
         required: value => !!value || "Generate or insert your own!",
@@ -98,13 +105,23 @@ export default {
       this.model = resultBinary;
       console.log(this.code(this.model));
     },
-    resetForm(resume){
-        this.answer = "",
-        this.dialog = false;
-        if(!resume) {
-            this.model="",
-            this.slider.value = this.slider.min+1;
-        }
+    resetForm(resume) {
+      this.dialog = false;
+      this.answer = "";
+      if (resume === "completed") {
+        this.completed++;
+        this.fullReset();
+        return;
+      }
+
+      if (!resume) {
+        this.fullReset();
+      }
+    },
+    fullReset() {
+      this.answer = "";
+      this.model = "";
+      this.slider.value = this.slider.default;
     }
   }
 };

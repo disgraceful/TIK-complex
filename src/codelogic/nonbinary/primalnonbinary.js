@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 const accomodation = {
     getCombination(alphabet, n) {
         let q = alphabet.length;

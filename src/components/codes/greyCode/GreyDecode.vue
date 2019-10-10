@@ -1,6 +1,5 @@
 <template>
   <v-card flat>
-    <v-card-title></v-card-title>
     <v-card-text class="title">Decode the message (insert or generate):</v-card-text>
     <v-card-actions>
       <v-col>

@@ -7,10 +7,10 @@ import CodePractice from "../shared/CodePractice";
 export default {
   data() {
     return {
-      name: "GreyCodePractice",
-      welcome: "Practice Gray Code before taking the test!",
-      code: () => import("./greyCode/GreyCode"),
-      decode: () => import("./greyCode/GreyDecode")
+      name: "SimpleRepeatCodePractice",
+      welcome: "Practice Simple Repeat Code before taking the test!",
+      code: () => import("./simpleRepeatCode/SimpleRepeatCode"),
+      decode: () => import("./simpleRepeatCode/SimpleRepeatDecode")
     };
   },
   components: { "code-practice": CodePractice }

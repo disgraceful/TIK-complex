@@ -1,20 +1,45 @@
 <template>
   <v-card flat>
+    <v-container>
+      <v-slider
+        v-model="slider.value"
+        :max="slider.max"
+        :min="slider.min"
+        label="Matrix"
+        @change="generate()"
+      >
+        <template v-slot:append>
+          <v-text-field
+            v-model="slider.value"
+            :min="slider.min"
+            :max="slider.max"
+            class="mt-0 pt-0"
+            hide-details
+            single-line
+            type="number"
+            style="width: 50px"
+            @input="generate()"
+          ></v-text-field>
+        </template>
+      </v-slider>
+    </v-container>
     <v-card-actions>
       <v-col>
-        <v-row v-for="i in matrix+1" :key="i">
-          <v-col v-for="j in matrix+1" :key="j">
-            <v-text-field style="width: 50px" v-model="values[`${i}${j}`]"></v-text-field>
+        <v-row v-for="i in slider.value+1" :key="i">
+          <v-col style="max-width: 70px" v-for="j in slider.value+1" :key="j">
+            <v-text-field style="width: 50px" v-model.number="values[`${i}${j}`]"></v-text-field>
           </v-col>
         </v-row>
       </v-col>
-      <v-row>
-        <v-col>
-          <v-btn @click="test()">Code</v-btn>
-          <v-text-field label="Q" style="width: 50px" v-model="q"></v-text-field>
-        </v-col>
-      </v-row>
     </v-card-actions>
+    <v-text-field label="Q" style="width: 50px" v-model="q"></v-text-field>
+    <v-row>
+      <v-col>
+        <v-btn @click="generate()">Generate</v-btn>
+        <v-btn @click="test()">Code</v-btn>
+        <v-btn :disabled="!check()" @click="submit()">Sumbit</v-btn>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 
@@ -23,17 +48,52 @@ import { iterateCode } from "../../../codelogic/nonbinary/iteratecode";
 export default {
   data() {
     return {
-      matrix: 2,
       q: 3,
-      values: {}
+      values: {},
+      slider: {
+        min: 2,
+        max: 6,
+        value: 2
+      }
     };
   },
   mixins: [iterateCode],
   methods: {
     test() {
-      console.log(this.values);
-      this.code(this.values, this.matrix, this.q);
+      this.code(this.values, this.slider.value, this.q);
+    },
+    check() {
+      let keys = Object.keys(this.values);
+
+      let res = keys.filter(x => x.includes(this.slider.value + 1));
+      console.log(res);
+      if (res.length !== this.slider.value * 2 + 1) return false;
+
+      let result = res.every(
+        x => this.values[x] !== "" && this.values[x] !== undefined
+      );
+
+      console.log(result);
+      return result;
+    },
+    generate() {
+      for (const key in this.values) {
+        this.values[key] = "";
+      }
+      for (let i = 1; i <= this.slider.value; i++) {
+        for (let j = 1; j <= this.slider.value; j++) {
+          this.values[`${i}${j}`] = Math.round(Math.random() * 9);
+        }
+      }
+      this.q = Math.round(Math.random() * 9);
+    },
+    submit() {
+      let answer = this.code(this.values, this.slider.value, this.q);
     }
+  },
+
+  created() {
+    this.generate();
   }
 };
 </script>

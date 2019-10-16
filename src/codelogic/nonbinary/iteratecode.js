@@ -22,14 +22,12 @@ export const iterateCode = {
         decode(message, matrix, q) {
             let equation = this.makeMatrix(message, matrix, false);
             equation = this.fillMatrix(equation);
-
             for (let i = 0; i < equation.length; i++) {
                 equation[i][equation.length - 1] = equation[i].reduce(this.reducer) % q;
                 equation[equation.length - 1][i] = equation.map(x => x[i]).reduce(this.reducer) % q;
             }
             console.log(equation);
-            return this.correct(equation);
-
+            return this.isCorrect(equation);
         },
         makeMatrix(message, matrix, coding) {
             let equation = [];
@@ -55,7 +53,7 @@ export const iterateCode = {
             console.log(oldMatrix);
             return oldMatrix;
         },
-        correct(matrix) {
+        isCorrect(matrix) {
             return matrix[matrix.length - 1].reduce(this.reducer) === 0 &&
                 matrix.map(x => x[matrix.length - 1]).reduce(this.reducer) === 0;
         }

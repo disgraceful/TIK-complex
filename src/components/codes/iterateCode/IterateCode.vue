@@ -66,7 +66,6 @@ export default {
       let keys = Object.keys(this.values);
 
       let res = keys.filter(x => x.includes(this.slider.value + 1));
-      console.log(res);
       if (res.length !== this.slider.value * 2 + 1) return false;
 
       let result = res.every(

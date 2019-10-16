@@ -33,19 +33,34 @@
       </v-col>
     </v-card-actions>
     <v-text-field label="Q" style="width: 50px" v-model="q"></v-text-field>
-    <v-text-field label="Mistakes" style="width: 50px" v-model="mistakes"></v-text-field>
+    <v-text-field
+      label="Mistakes"
+      style="width: 50px"
+      v-model="mistakes"
+      type="number"
+      min="1"
+      max="4"
+    ></v-text-field>
     <v-row>
       <v-col>
         <v-btn @click="generateWithMistake()">Generate</v-btn>
         <v-btn @click="test()">TestDecode</v-btn>
         <v-btn :disabled="!check()" @click="submit()">Sumbit</v-btn>
       </v-col>
+      <v-dialog v-model="dialog" max-width="330px" hide-overlay>
+        <code-dialog
+          :correct="correct"
+          @endDialog="resetForm($event)"
+          @completed="resetForm('completed')"
+        ></code-dialog>
+      </v-dialog>
     </v-row>
   </v-card>
 </template>
 
 <script>
 import { iterateCode } from "../../../codelogic/nonbinary/iteratecode";
+import CodeDialog from "../../shared/CodeCompleteDialog";
 export default {
   data() {
     return {
@@ -56,10 +71,14 @@ export default {
         min: 2,
         max: 6,
         value: 2
-      }
+      },
+      dialog: false,
+      correct: false,
+      completed: 0
     };
   },
   mixins: [iterateCode],
+  components: { "code-dialog": CodeDialog },
   methods: {
     test() {
       console.log(this.decode(this.values, this.slider.value, this.q));
@@ -74,20 +93,16 @@ export default {
     generateWithMistake() {
       this.generate();
       let coded = this.code(this.values, this.slider.value, this.q);
-      console.log(coded);
-
       for (let i = 1; i <= coded.length; i++) {
         for (let j = 1; j <= coded.length; j++) {
           this.values[`${i}${j}`] = coded[i - 1][j - 1];
         }
       }
-      console.log(this.values);
       let counter = this.mistakes;
       while (counter > 0) {
-       this.createMistake();
+        this.createMistake();
         counter--;
       }
-
       this.q += 1;
       this.q -= 1;
     },
@@ -100,27 +115,35 @@ export default {
           this.values[`${i}${j}`] = Math.round(Math.random() * 9);
         }
       }
-      this.q = Math.round(Math.random() * 9);
+      this.q = Math.round(Math.random() * 7 + 2);
     },
     submit() {
-      let answer = this.code(this.values, this.slider.value, this.q);
+      this.correct = this.decode(this.values, this.slider.value, this.q);
+      this.dialog = true;
     },
     createMistake() {
-      let randRow = Math.round(Math.random() * this.slider.value);
-      let randCol = Math.round(Math.random() * this.slider.value);
-      console.log(randRow, randCol);
+      let randRow = Math.round(Math.random() * (this.slider.value - 1) + 1);
+      let randCol = Math.round(Math.random() * (this.slider.value - 1) + 1);
       let oldValue = this.values[`${randRow}${randCol}`];
-      let newValue = (oldValue - Math.round(Math.random() * 9)) % this.q;
-      newValue =
-        newValue === oldValue || newValue - oldValue === this.q
-          ? oldValue -1 
-          : newValue;
-      this.values[`${randRow}${randCol}`] = this.values[`${randRow}${randCol}`];
+      let newValue = this.generateRandomValue(oldValue);
+      while (newValue === oldValue || (newValue - oldValue) % this.q === 0) {
+        newValue = this.generateRandomValue(oldValue);
+      }
+      this.values[`${randRow}${randCol}`] = newValue;
+    },
+    generateRandomValue(old) {
+      let newV = Math.round(Math.random() * 9);
+      return newV;
+    },
+    resetForm(resume) {
+      if (resume === "completed") {
+        this.completed++;
+      }
+      if (!resume) {
+        Object.keys(this.values).forEach(key => (this.values[key] = ""));
+      }
+      this.dialog = false;
     }
-  },
-
-  created() {
-    //this.generate();
   }
 };
 </script>

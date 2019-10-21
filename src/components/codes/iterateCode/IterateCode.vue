@@ -39,12 +39,20 @@
         <v-btn @click="test()">Code</v-btn>
         <v-btn :disabled="!check()" @click="submit()">Sumbit</v-btn>
       </v-col>
+      <v-dialog v-model="dialog" max-width="330px" hide-overlay>
+        <code-dialog
+          :correct="correct"
+          @endDialog="resetForm($event)"
+          @completed="resetForm('completed')"
+        ></code-dialog>
+      </v-dialog>
     </v-row>
   </v-card>
 </template>
 
 <script>
 import { iterateCode } from "../../../codelogic/nonbinary/iteratecode";
+import CodeDialog from "../../shared/CodeCompleteDialog"
 export default {
   data() {
     return {
@@ -54,10 +62,14 @@ export default {
         min: 2,
         max: 6,
         value: 2
-      }
+      },
+      dialog: false,
+      completed: 0,
+      correct: false
     };
   },
   mixins: [iterateCode],
+  components: { "code-dialog": CodeDialog },
   methods: {
     test() {
       this.code(this.values, this.slider.value, this.q);
@@ -88,6 +100,18 @@ export default {
     },
     submit() {
       let answer = this.code(this.values, this.slider.value, this.q);
+      console.log(answer);
+      this.correct = this.decode(this.values, this.slider.value, this.q);
+      this.dialog = true;
+    },
+    resetForm(resume) {
+      if (resume === "completed") {
+        this.completed++;
+      }
+      if (!resume) {
+        Object.keys(this.values).forEach(key => (this.values[key] = ""));
+      }
+      this.dialog = false;
     }
   },
 

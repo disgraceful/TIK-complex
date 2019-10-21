@@ -52,7 +52,8 @@ export default {
         subcodes: [
           { name: "Grey Code" },
           { name: "Berger Code" },
-          { name: "Binary Decimal Code" }
+          { name: "Binary Decimal Code" },
+          { name: "ShennonFano Code" }
         ]
       }
     ]

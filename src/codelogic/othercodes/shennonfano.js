@@ -33,7 +33,9 @@ export const shennonFano = {
                     break;
                 }
             }
-            if(!this.getLastMapValue().includes("0") && this.getLastMapValue().length>1) {this.temp = []}
+            if (!this.getLastMapValue().includes("0") && this.getLastMapValue().length > 1) {
+                this.temp = [];
+            }
             if (this.first.length > 1 && array.length > 2) {
                 this.temp = this.second;
                 this.cycle(this.first);

@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vue from "vue";
+import Vuetify from "vuetify/lib";
 
 Vue.use(Vuetify, {
-  iconfont: 'mdi'
+  iconfont: "mdi"
 });
 
 export default new Vuetify({
   icons: {
-    iconfont: 'mdi',
-  },
+    iconfont: "mdi"
+  }
 });

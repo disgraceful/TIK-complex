@@ -7,6 +7,8 @@ import RegisterPage from "@/views/authentication/RegisterPage.vue";
 
 Vue.use(Router);
 
+//ad
+
 export default new Router({
   routes: [
     {

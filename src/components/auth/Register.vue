@@ -84,7 +84,9 @@ export default {
     };
   },
   methods: {
-    onSignUp() {},
+    onSignUp() {
+      this.$store.dispatch('signUpUser',{email: this.email, password: this.password})
+    },
     toLogin() {}
   }
 };

@@ -1,13 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/HomePage.vue";
 import Info from "../views/Info.vue";
 import Code from "../views/Code.vue";
 import RegisterPage from "@/views/authentication/RegisterPage.vue";
 
 Vue.use(Router);
-
-//ad
 
 export default new Router({
   routes: [

@@ -1,7 +1,7 @@
 <template>
   <v-card color="gry lighten-4" flat>
     <v-toolbar color="primary" :dark="true">
-      <v-toolbar-title>Info&Code</v-toolbar-title>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text to="/">Список кодів</v-btn>
       <v-btn text to="/add">Додатки</v-btn>
@@ -19,6 +19,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      title: `Info&Code`
+    };
+  },
   computed: {
     user() {
       return this.$store.getters.getUser;

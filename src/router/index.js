@@ -2,9 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/HomePage.vue";
 import Info from "../views/Info.vue";
-import Code from "../views/CodePage.vue";
+import Code from "@/views/code/Code.vue";
 import RegisterPage from "@/views/authentication/RegisterPage.vue";
-import CodeTheory from "@/views/CodeTheory.vue";
+// import CodeTheory from "@/views/code/CodeTheory.vue";
 
 Vue.use(Router);
 
@@ -24,14 +24,14 @@ export default new Router({
       path: "/code/:name",
       name: "code",
       component: Code,
-      props: true,
-      children: [
-        {
-          path: "/code/:name/theory",
-          name: "codeTheory",
-          component: CodeTheory
-        }
-      ]
+      props: true
+      // children: [
+      //   {
+      //     path: "/code/:name/theory",
+      //     name: "codeTheory",
+      //     component: CodeTheory
+      //   }
+      // ]
     },
     {
       path: "/register",

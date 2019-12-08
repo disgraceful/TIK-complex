@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import * as store from "./store";
+import { store } from "./store/index.js";
 import vuetify from "./plugins/vuetify";
 import * as firebase from "firebase";
 

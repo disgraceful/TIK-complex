@@ -1,13 +1,18 @@
 <template>
   <v-card>
-    <v-card-title>{{$route.params.name}}</v-card-title>
+    <v-card-title>{{ code.name }}</v-card-title>
 
     <v-container>
-      <v-row>
-        <v-btn text @click="$router.push({path:'/'})">Back To Codes</v-btn>
-        <v-btn text @click="setActiveComponent('Theory')">Theory</v-btn>
-        <v-btn text @click="setActiveComponent('Test')">Test</v-btn>
-        <v-btn text @click="setActiveComponent('Practice')">Practice</v-btn>
+      <v-divider></v-divider>
+      <v-row justify="center">
+        <v-btn large text @click="setActiveComponent('Theory')">Теорія</v-btn>
+        <v-btn large text @click="setActiveComponent('Test')">Кодування</v-btn>
+        <v-btn large text @click="setActiveComponent('Practice')"
+          >Декодування</v-btn
+        >
+        <v-btn large text @click="setActiveComponent('Practice')"
+          >Тестування</v-btn
+        >
       </v-row>
     </v-container>
     <keep-alive>
@@ -18,16 +23,19 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-      codeName: this.$route.params.name,
       componentName: null,
       activeComponent: () => import(`../components/codes/${this.componentName}`)
     };
   },
+  props: ["name"],
   computed: {
     loader() {
       return () => import(`../components/codes/${this.componentName}`);
+    },
+    code() {
+      return this.$store.getters.getCodeById(this.name);
     }
   },
   methods: {
@@ -37,7 +45,7 @@ export default {
     }
   },
   beforeMount() {
-    this.componentName = `${this.codeName}Practice`;
+    this.componentName = `${this.name}Practice`;
   },
   mounted() {
     this.loader()

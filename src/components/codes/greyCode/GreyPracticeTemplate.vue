@@ -49,9 +49,9 @@
       </v-flex>
     </v-container>
     <v-container pt-0>
-      <v-btn class="ma-3" @click="fullReset">Reset</v-btn>
+      <v-btn class="ma-3" @click="fullReset">Очистити</v-btn>
       <v-btn class="ma-3" :disabled="valid" color="primary" @click="submit"
-        >Submit</v-btn
+        >Підтвердити</v-btn
       >
     </v-container>
     <v-dialog v-model="dialog" max-width="330px" hide-overlay>
@@ -106,6 +106,7 @@ export default {
   },
   methods: {
     generateBinary() {
+      //to MIXINS
       let resultBinary = "";
       for (let i = 0; i < this.slider.value; i++) {
         resultBinary = resultBinary.concat(Math.random() < 0.5 ? "0" : "1");

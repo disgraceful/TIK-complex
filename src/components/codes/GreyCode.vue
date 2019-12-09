@@ -12,10 +12,8 @@ import eventBus from "../../main";
 export default {
   data() {
     return {
-      activeComponent: () => import("./greyCode/GreyCodeTheory"),
+      activeComponent: () => import("./greyCode/GreyPractice"),
       theory: () => import("./greyCode/GreyCodeTheory"),
-      code: () => import("./greyCode/GreyCodePractice"),
-      decode: () => import("./greyCode/GreyDecodePractice"),
       test: () => import("./greyCode/GreyCodeTest"),
       practice: () => import("./greyCode/GreyPractice")
     };

@@ -7,7 +7,11 @@
       <v-btn text to="/add">Додатки</v-btn>
       <v-btn text to="/info">Інфо</v-btn>
       <v-spacer></v-spacer>
-      <router-link to="/user" tag="div">
+      <router-link
+        :to="{ name: 'user', params: { id: 'rfeu9erwpewjoprtfio' } }"
+        tag="div"
+        class="link"
+      >
         <v-flex shrink>
           <v-avatar size="36px"> <v-icon>mdi-account-circle</v-icon> </v-avatar
           >{{ user.email }}</v-flex
@@ -31,3 +35,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.link {
+  cursor: pointer;
+}
+</style>

@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     authUser: {
+      id: "rfeu9erwpewjoprtfio",
       email: "hatemyself393@gmail.com"
     },
     codes: [
@@ -55,6 +56,19 @@ export const store = new Vuex.Store({
         ],
         progress: 25
       }
+    ],
+    completedTests: [
+      {
+        codeName: "Код Грея",
+        result: "4/5",
+        timeUsed: "3:37",
+        date: "09-12-2019 04:42"
+      }, {
+        codeName: "Код Бергера",
+        result: "2/5",
+        timeUsed: "4:21",
+        date: "10-12-2019 12:56"
+      },
     ]
   },
   mutations: {},
@@ -73,7 +87,11 @@ export const store = new Vuex.Store({
 
     getUser(state) {
       return state.authUser;
+    },
+    getCompletedTests(state) {
+      return state.completedTests;
     }
+
   }
 })
 

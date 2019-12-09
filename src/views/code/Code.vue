@@ -1,21 +1,19 @@
 <template>
   <v-card>
     <v-card-title>{{ getCode.name }}</v-card-title>
-    <!-- <v-container>
-      <v-divider></v-divider>
-      <v-row justify="center">
-        <v-btn large text :to="{ name: 'codeTheory' }">Теорія</v-btn>
-        <v-btn large text :to="{ name: 'code' }">Практика</v-btn>
-        <v-btn large text :to="{ name: 'code' }">Тестування</v-btn>
-      </v-row>
-    </v-container> -->
     <component :is="loaderComponent">
+      <v-divider></v-divider>
       <v-container>
-        <v-divider></v-divider>
         <v-row justify="center">
-          <v-btn large text @click="setComponent('theory')">Теорія</v-btn>
-          <v-btn large text @click="setComponent('practice')">Практика</v-btn>
-          <v-btn large text @click="setComponent('test')">Тестування</v-btn>
+          <v-btn large text @click="setComponent('theory')">
+            Теорія <v-icon right>mdi-file-document</v-icon></v-btn
+          >
+          <v-btn large text @click="setComponent('practice')">
+            Практика <v-icon right>mdi-pencil-plus</v-icon></v-btn
+          >
+          <v-btn large text @click="setComponent('test')">
+            Тестування <v-icon right>mdi-timer-sand</v-icon></v-btn
+          >
         </v-row>
       </v-container>
     </component>
@@ -23,6 +21,7 @@
 </template>
 
 <script>
+import eventBus from "../../main";
 export default {
   props: ["name"],
   computed: {
@@ -33,6 +32,11 @@ export default {
       return () => import(`../../components/codes/${this.name}`);
     }
   },
-  methods: {}
+  methods: {
+    setComponent(component) {
+      console.log("was enit", component);
+      eventBus.$emit("componentChanged", component);
+    }
+  }
 };
 </script>

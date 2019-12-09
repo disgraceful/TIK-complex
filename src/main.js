@@ -7,6 +7,9 @@ import * as firebase from "firebase";
 
 Vue.config.productionTip = false;
 
+const eventBus = new Vue();
+export default eventBus;
+
 new Vue({
   router,
   store,

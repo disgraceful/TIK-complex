@@ -1,10 +1,5 @@
 <template>
   <v-container>
-    <!--  <v-row justify="center">
-      <v-btn large text @click="setComponent('theory')">Теорія</v-btn>
-      <v-btn large text @click="setComponent('practice')">Практика</v-btn>
-      <v-btn large text @click="setComponent('test')">Тестування</v-btn>
-    </v-row> -->
     <slot></slot>
     <keep-alive>
       <component :is="activeComponent"></component>
@@ -13,6 +8,7 @@
 </template>
 
 <script>
+import eventBus from "../../main";
 export default {
   data() {
     return {
@@ -24,10 +20,10 @@ export default {
       practice: () => import("./greyCode/GreyPractice")
     };
   },
-  methods: {
-    setComponent(component) {
+  created() {
+    eventBus.$on("componentChanged", component => {
       this.activeComponent = this[component];
-    }
+    });
   }
 };
 </script>

@@ -11,12 +11,15 @@
       >
       <v-container>
         <v-layout justify-center>
-          <v-btn color="primary" @click="startTest">Старт</v-btn>
+          <v-btn v-if="!testStarted" color="primary" @click="startTest"
+            >Старт</v-btn
+          >
+
+          <v-flex v-else class="text-center" style="height:36px"
+            >Час до кінця: {{ date }}
+          </v-flex>
         </v-layout>
       </v-container>
-      <v-layout>
-        <v-col class="text-center"> Час до кінця: {{ date }} </v-col>
-      </v-layout>
       <v-container>
         <v-layout row justify-space-around>
           <v-flex xs6>
@@ -57,20 +60,22 @@
           </v-flex>
         </v-layout>
       </v-container>
-      <v-flex xs4 offset-sm1>
-        <v-btn color="primary" :disabled="valid" @click="submit"
+
+      <v-layout xs6 sm12 offset-sm-1>
+        <v-btn class="ma-2" color="primary" :disabled="valid" @click="submit"
           >Підтвердити</v-btn
         >
-      </v-flex>
+        <v-btn class="ma-2" :disabled="!testStarted" @click="cancel">
+          Відмінити
+        </v-btn>
+      </v-layout>
       <!-- to separate component -->
       <v-dialog v-model="dialog" max-width="340px" hide-overlay>
         <v-card>
           <v-card-title class="headline">Тестування пройдено!</v-card-title>
-
           <v-card-text class="subtitle-1 black--text">
             Правильних відповідей: 4/{{ taskAmount }}
           </v-card-text>
-
           <v-expansion-panels>
             <v-expansion-panel v-for="(task, i) in allTasks" :key="i">
               <v-expansion-panel-header disable-icon-rotate
@@ -121,7 +126,8 @@ export default {
       complexity: 4,
       tasksCompleted: 0,
       minutesTotal: 1,
-      timeLeft: 1 * 60
+      timeLeft: 1 * 60,
+      testStarted: false
     };
   },
   computed: {
@@ -138,6 +144,7 @@ export default {
   },
   methods: {
     startTest() {
+      this.testStarted = true;
       this.generateTasks();
       this.currentTask = 0;
       this.model = this.allTasks[this.currentTask];
@@ -173,6 +180,9 @@ export default {
         }
         this.answer = " ";
       }
+    },
+    cancel() {
+      this.testStarted = false;
     }
   }
 };

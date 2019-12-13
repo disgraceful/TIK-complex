@@ -71,8 +71,22 @@ export const store = new Vuex.Store({
       },
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createTestRecord(state, payload) {
+      state.completedTests.push(payload);
+    }
+  },
+  actions: {
+    createTestRecord({ commit }, payload) {
+      const test = {
+        codeName: payload.codeName,
+        result: payload.result,
+        timeUsed: payload.timeUsed,
+        date: payload.timeUsed
+      }
+      commit('createTestRecord', test);
+    }
+  },
   getters: {
     allCodes(state) {
       return state.codes;

@@ -183,6 +183,14 @@ export default {
     },
     cancel() {
       this.testStarted = false;
+      this.timeLeft = this.minutesTotal;
+      this.allTasks = [];
+      this.allAnswers = [];
+      tasksCompleted = 0;
+    },
+    saveCompletedTest(){
+      const test = {},
+      this.$store.dispatch('createTestRecord',test);
     }
   }
 };

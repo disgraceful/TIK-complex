@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
   state: {
     authUser: {
       id: "rfeu9erwpewjoprtfio",
-      email: "hatemyself393@gmail.com"
+      email: "nkash123@gmail.com"
     },
     codes: [
       { name: "Систематичні коди", subcodes: [] },

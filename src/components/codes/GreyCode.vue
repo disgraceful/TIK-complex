@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       name: "Код Грея",
-      activeComponent: () => import("./greyCode/GreyCodeTest"),
+      activeComponent: () => import("./greyCode/GreyCodeTheory"),
       theory: () => import("./greyCode/GreyCodeTheory"),
       test: () => import("./greyCode/GreyCodeTest"),
       practice: () => import("./greyCode/GreyPractice")

@@ -8,8 +8,8 @@
         >Перед проходженням тестування рекомендується виконати тренувальні
         вправи!
         <br />
-        Усього виконано вправ: 6</v-card-text
-      >
+        <!-- Усього виконано вправ: 6 -->
+      </v-card-text>
       <v-tabs v-model="active">
         <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
       </v-tabs>

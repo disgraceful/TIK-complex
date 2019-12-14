@@ -8,7 +8,7 @@
       <v-btn text to="/info">Інфо</v-btn>
       <v-spacer></v-spacer>
       <router-link
-        :to="{ name: 'user', params: { id: 'rfeu9erwpewjoprtfio' } }"
+        :to="{ name: 'user-results', params: { id: 'rfeu9erwpewjoprtfio' } }"
         tag="div"
         class="link"
       >

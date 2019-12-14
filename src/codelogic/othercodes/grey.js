@@ -8,7 +8,7 @@ export const greyCodeLogic = {
                 else return e ^ split[index + 1];
             })
             let answer = coded.reverse().join("")
-            console.log("anwer", answer);
+            console.log("answer", answer);
             return answer;
 
         },

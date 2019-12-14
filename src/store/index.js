@@ -14,8 +14,8 @@ export const store = new Vuex.Store({
       email: "hatemyself393@gmail.com"
     },
     codes: [
-      { name: "Систематичні коди", subcodes: [], progress: 0 },
-      { name: "Циклічні коди", subcodes: [], progress: 0 },
+      { name: "Систематичні коди", subcodes: [] },
+      { name: "Циклічні коди", subcodes: [] },
       {
         name: "Недвійкові коди",
         subcodes: [
@@ -35,8 +35,7 @@ export const store = new Vuex.Store({
             complete: true
           },
           { name: "Ітеративний код", codecCode: "IterateCode", complete: false }
-        ],
-        progress: 50
+        ]
       },
       {
         name: "Інші коди",
@@ -53,27 +52,31 @@ export const store = new Vuex.Store({
             codecCode: "ShennonFano",
             complete: false
           }
-        ],
-        progress: 25
+        ]
       }
     ],
     completedTests: [
       {
-        codeName: "Код Грея",
+        codeName: "Код з перевіркою по модулю q",
         result: "4/5",
         timeUsed: "3:37",
-        date: "09-12-2019 04:42"
+        date: "09.12.2019, 04:42:12"
       }, {
-        codeName: "Код Бергера",
-        result: "2/5",
+        codeName: "Двійково-десятковий код",
+        result: "3/5",
         timeUsed: "4:21",
-        date: "10-12-2019 12:56"
+        date: "10.12.2019, 12:56:12"
       },
     ]
   },
   mutations: {
     createTestRecord(state, payload) {
       state.completedTests.push(payload);
+    },
+    completeCode(state, payload) {
+      let found = state.codes.find(code => code.subcodes.find(subcode => subcode.codecCode == payload.codecCode));
+      let index = found.subcodes.findIndex(subcode => subcode.codecCode == payload.codecCode);
+      found.subcodes[index].complete = true;
     }
   },
   actions: {
@@ -82,9 +85,13 @@ export const store = new Vuex.Store({
         codeName: payload.codeName,
         result: payload.result,
         timeUsed: payload.timeUsed,
-        date: payload.timeUsed
+        date: payload.date
       }
       commit('createTestRecord', test);
+      console.log('saved by Vuex');
+    },
+    completeCode({ commit }, payload) {
+      commit('completeCode', payload);
     }
   },
   getters: {
@@ -98,12 +105,30 @@ export const store = new Vuex.Store({
         return found.subcodes.find(subcode => subcode.codecCode == codecCode);
       }
     },
+    getCodeProgressArray(state) {
+      let result = [];
 
+      state.codes.forEach(code => {
+        let subcodeCompleted = 0;
+        code.subcodes.forEach(subcode => {
+          if (subcode.complete) subcodeCompleted++;
+        })
+
+        let submit = code.subcodes.length <= 0 ? 0 : (subcodeCompleted / code.subcodes.length) * 100;
+        result.push(submit);
+      })
+      return result;
+    },
     getUser(state) {
       return state.authUser;
     },
     getCompletedTests(state) {
       return state.completedTests;
+    },
+    getTestByName(state) {
+      return (testName) => {
+        return state.completedTests.find(test => test.codeName == testName);
+      }
     }
 
   }

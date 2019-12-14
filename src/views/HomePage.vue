@@ -1,14 +1,19 @@
 <template>
   <v-card>
     <v-list>
-      <v-list-group no-action sub-group v-for="code in codes" :key="code.name">
+      <v-list-group
+        no-action
+        sub-group
+        v-for="(code, i) in codes"
+        :key="code.name"
+      >
         <template v-slot:activator>
           <v-list-item-title class="title">
             <v-container>
               <v-row>
                 <v-flex grow>{{ code.name }}</v-flex>
                 <v-progress-circular
-                  :value="code.progress"
+                  :value="codeProgress[i]"
                   color="green"
                   rotate="90"
                 ></v-progress-circular>
@@ -60,6 +65,9 @@ export default {
   computed: {
     codes() {
       return this.$store.getters.allCodes;
+    },
+    codeProgress() {
+      return this.$store.getters.getCodeProgressArray;
     }
   }
 };
